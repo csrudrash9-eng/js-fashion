@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYBERFIRE</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; background: #000; color: #00ff41;
+  font-family: monospace; display: flex; justify-content: center;
+  align-items: center; overflow: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(transparent 0px,
+    rgba(0,255,65,.08) 2px, transparent 4px);
+  animation: scan 5s linear infinite;
+}
+@keyframes scan {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(100px); }
+}
+.box {
+  position: relative; width: 85%; max-width: 380px; padding: 35px 25px;
+  border: 1px solid #00ff41; box-shadow: 0 0 25px #00ff41;
+  text-align: center; background: rgba(0,15,0,.95);
+}
+h1 { font-size: 35px; text-shadow: 0 0 15px #00ff41; letter-spacing: 5px; }
+p { color: #00bb33; }
+input {
+  width: 100%; padding: 14px; margin: 20px 0; background: black;
+  color: #00ff41; border: 1px solid #00ff41; outline: none;
+  font-size: 18px; text-align: center;
+}
+button {
+  width: 100%; padding: 13px; background: #00ff41; color: black;
+  border: none; font-weight: bold; font-size: 16px; cursor: pointer;
+}
+#error { color: red; margin-top: 15px; }
+#interface { display: none; position: relative; text-align: center; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="box" id="login">
+  <h1>CYBERFIRE</h1>
+  <p>SECURE ACCESS SYSTEM</p>
+  <p>ENTER PASSWORD</p>
+  <input type="password" id="pass" placeholder="Enter password"
+         autocomplete="off" onkeydown="if(event.key==='Enter') unlock()">
+  <button onclick="unlock()">ACCESS SYSTEM</button>
+  <div id="error" role="alert"></div>
+</div>
+<div id="interface">
+  <h1>WELCOME TO CYBERFIRE</h1>
+  <p>ACCESS GRANTED</p>
+  <p>SYSTEM ONLINE 🟢</p>
+</div>
+<script>
+function unlock() {
+  const password = document.getElementById("pass").value;
+  if (password === "#111#") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("interface").style.display = "block";
+  } else {
+    document.getElementById("error").textContent =
+      "ACCESS DENIED! WRONG PASSWORD";
+  }
+}
+</script>
+</body>
+</html>
